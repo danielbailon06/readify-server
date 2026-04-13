@@ -88,8 +88,20 @@ router.post("/login", async (req, res, next) => {
 });
 
 // GET /api/auth/verify
-router.get("/verify", isAuthenticated, (req, res, next) => {
-  res.status(200).json(req.payload);
+router.get("/verify", isAuthenticated, async (req, res, next) => {
+  try {
+    const { _id } = req.payload;
+
+    const user = await User.findById(_id).select("-passwordHash");
+
+    if (!user) {
+      return res.status(404).json({ message: "Usuario no encontrado" });
+    }
+
+    res.status(200).json(user);
+  } catch (error) {
+    next(error);
+  }
 });
 
 module.exports = router;

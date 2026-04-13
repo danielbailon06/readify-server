@@ -27,6 +27,10 @@ const userSchema = new Schema(
       type: String,
       default: "",
     },
+    location: {
+      type: String,
+      default: "",
+    },
     wantToRead: [
       {
         type: Schema.Types.ObjectId,
@@ -45,6 +49,11 @@ const userSchema = new Schema(
         ref: "Book",
       },
     ],
+    readingProgress: {
+      type: Map,
+      of: Number,
+      default: {},
+    },
   },
   { timestamps: true }
 );
