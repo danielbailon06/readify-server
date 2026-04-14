@@ -28,11 +28,24 @@ router.post("/signup", async (req, res, next) => {
     const salt = await bcrypt.genSalt(saltRounds);
     const hashedPassword = await bcrypt.hash(password, salt);
 
+    const defaultAvatars = [
+      "/avatars/avatar1.png",
+      "/avatars/avatar2.png",
+      "/avatars/avatar3.png",
+      "/avatars/avatar4.png",
+      "/avatars/avatar5.png",
+    ];
+
+    const assignedProfileImage =
+      profileImage && profileImage.trim() !== ""
+        ? profileImage
+        : defaultAvatars[Math.floor(Math.random() * defaultAvatars.length)];
+
     const newUser = await User.create({
       username,
       email,
       passwordHash: hashedPassword,
-      profileImage,
+      profileImage: assignedProfileImage,
       bio,
     });
 

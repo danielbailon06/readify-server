@@ -1,8 +1,32 @@
 const express = require("express");
 const router = express.Router();
+const mongoose = require("mongoose");
 
 const User = require("../models/User.model");
 const { isAuthenticated } = require("../middleware/isAuthenticated");
+
+// GET /api/users -> usuarios random
+router.get("/", isAuthenticated, async (req, res, next) => {
+  try {
+    const users = await User.aggregate([
+      {
+        $match: {
+          _id: { $ne: new mongoose.Types.ObjectId(req.payload._id) },
+        },
+      },
+      { $sample: { size: 3 } },
+    ]);
+
+    const populatedUsers = await User.populate(users, [
+      { path: "currentlyReading" },
+      { path: "read" },
+    ]);
+
+    res.json(populatedUsers);
+  } catch (error) {
+    next(error);
+  }
+});
 
 // GET /api/users/:userId -> obtener perfil de usuario
 router.get("/:userId", async (req, res, next) => {
