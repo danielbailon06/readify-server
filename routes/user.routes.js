@@ -10,7 +10,7 @@ router.get("/:userId", async (req, res, next) => {
     const { userId } = req.params;
 
     const user = await User.findById(userId)
-      .select("-passwordHash")
+      .select("-passwordHash") 
       .populate("wantToRead")
       .populate("currentlyReading")
       .populate("read");
