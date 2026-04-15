@@ -1,5 +1,4 @@
 const express = require("express");
-const cors = require("cors");
 const logger = require("morgan");
 const cookieParser = require("cookie-parser");
 const { connectDB } = require("./db");
@@ -22,11 +21,6 @@ app.use(async (req, res, next) => {
     }
 });
 
-app.use(
-  cors({
-    origin: "http://localhost:5173",
-  })
-);
 
 app.use(logger("dev"));
 app.use(express.json());
