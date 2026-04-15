@@ -22,9 +22,8 @@ app.use(async (req, res, next) => {
 });
 
 
-app.use(logger("dev"));
-app.use(express.json());
-app.use(cookieParser());
+require("./config/index")(app)
+
 
 app.use("/api/auth", authRoutes);
 app.use("/api/books", bookRoutes);
