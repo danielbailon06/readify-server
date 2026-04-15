@@ -54,6 +54,41 @@ const userSchema = new Schema(
       of: Number,
       default: {},
     },
+    chatMemory: {
+      mood: {
+        type: String,
+        default: "",
+      },
+      preferredGenres: {
+        type: [String],
+        default: [],
+      },
+      dislikedGenres: {
+        type: [String],
+        default: [],
+      },
+      shortReplies: {
+        type: Boolean,
+        default: false,
+      },
+    },
+    chatHistory: [
+      {
+        role: {
+          type: String,
+          enum: ["user", "assistant"],
+          required: true,
+        },
+        content: {
+          type: String,
+          required: true,
+        },
+        createdAt: {
+          type: Date,
+          default: Date.now,
+        },
+      },
+    ],
   },
   { timestamps: true }
 );
