@@ -2,6 +2,7 @@ const express = require("express");
 const cors = require("cors");
 const logger = require("morgan");
 const cookieParser = require("cookie-parser");
+const { connectDB } = require("./db");
 
 const authRoutes = require("./routes/auth.routes");
 const bookRoutes = require("./routes/book.routes");
@@ -10,6 +11,16 @@ const shelfRoutes = require("./routes/shelf.routes");
 const chatRoutes = require("./routes/chat.routes");
 
 const app = express();
+
+// Each time a request is made, ensure DB is connected
+app.use(async (req, res, next) => {
+    try {
+        await connectDB();
+        next();
+    } catch (e) {
+        next(e);
+    }
+});
 
 app.use(
   cors({
