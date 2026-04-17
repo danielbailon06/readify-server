@@ -122,12 +122,12 @@ Body:
 Mueve el libro automáticamente entre listas
 
 #### Eliminar libro de biblioteca
-DELETE /api/users/:userId/reading-status/:bookId 🔒
+DELETE /api/users/:userId/reading-status/:bookId
 
 Elimina el libro de todas las listas
 
 #### Progreso de lectura
-PUT /api/users/:userId/progress/:bookId 🔒
+PUT /api/users/:userId/progress/:bookId
 
 Body:
 
@@ -140,37 +140,37 @@ Guarda el progreso en readingProgress (Map en MongoDB)
 ### Shelves (/api/shelves)
 
 Gestión de estanterías
-GET /api/shelves 🔒
+GET /api/shelves
 → Obtener todas las shelves del usuario
 
-POST /api/shelves 🔒
+POST /api/shelves
 → Crear nueva shelf
 
 {
   "name": "Romance cozy",
   "description": "Libros para leer con mantita"
 }
-GET /api/shelves/:shelfId 🔒
+GET /api/shelves/:shelfId
 → Obtener detalle de una shelf
-PUT /api/shelves/:shelfId 🔒
+PUT /api/shelves/:shelfId
 → Editar shelf
-DELETE /api/shelves/:shelfId 🔒
+DELETE /api/shelves/:shelfId
 → Eliminar shelf
 Libros en shelves
 
-POST /api/shelves/:shelfId/books 🔒
+POST /api/shelves/:shelfId/books
 → Añadir libro
 
 {
   "bookId": "id_del_libro"
 }
-DELETE /api/shelves/:shelfId/books/:bookId 🔒
+DELETE /api/shelves/:shelfId/books/:bookId
 → Quitar libro
 
 ### Chat IA (/api/chat)
 
 #### Chat
-POST /api/chat 🔒
+POST /api/chat
 
 Body:
 
